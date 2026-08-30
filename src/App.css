@@ -1,0 +1,173 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f4f8;
+  color: #222;
+}
+
+.app {
+  max-width: 650px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.header h1 {
+  font-size: 24px;
+}
+
+.clock {
+  color: #666;
+  font-size: 14px;
+}
+
+.form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.form input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+}
+
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 5px;
+  background: #3b6ea5;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2f5883;
+}
+
+button:disabled {
+  background: #9aa8b8;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #c0392b;
+  font-size: 14px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.message {
+  color: #2e7d32;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.api-box {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.clear {
+  background: #8d8d8d;
+}
+
+.clear:hover {
+  background: #6f6f6f;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.buttons button {
+  background: #e6e9ef;
+  color: #333;
+  margin-right: 5px;
+}
+
+.buttons button.active {
+  background: #3b6ea5;
+  color: #fff;
+}
+
+.stats {
+  margin: 12px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.list {
+  list-style: none;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #e2e2e2;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.task .info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.task .meta {
+  font-size: 12px;
+  color: #777;
+}
+
+.task.done .title {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.delete {
+  background: #c0392b;
+}
+
+.delete:hover {
+  background: #a33224;
+}
+
+.empty {
+  text-align: center;
+  color: #888;
+  padding: 15px;
+}
