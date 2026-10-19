@@ -1,26 +1,78 @@
 # Task Manager
 
-Simple task manager made with HTML, CSS and JavaScript.
+მარტივი აპლიკაცია დავალებების სამართავად. დაწერილია HTML, CSS და JavaScript-ზე, ბიბლიოთეკების გარეშე.
 
-## Features
+## როგორ გავუშვა
 
-1. Add task with name and priority
-2. Form validation
-3. Delete task and clear the list
-4. Change status (done / active)
-5. Filter by status and sort by date or name
-6. Date object for task date and for the clock
-7. localStorage for saving tasks
-8. setInterval for the clock, setTimeout for the message
-9. Fetch API with async/await, GET https://jsonplaceholder.typicode.com/todos?_limit=5
-10. Error handling for the request
+1. გადმოწერე ან დააკლონე პროექტი.
+2. გახსენი `index.html` ბრაუზერში (უბრალოდ ორჯერ დააჭირე).
 
-## Files
+არაფრის დაყენება არ არის საჭირო. "Load from API" ღილაკისთვის ინტერნეტი უნდა იყოს ჩართული.
 
-- `index.html` - page structure
-- `style.css` - styles
-- `script.js` - all the logic
+## ფაილები
 
-## Run
+| ფაილი | რა არის შიგნით |
+|-------|----------------|
+| `index.html` | გვერდის სტრუქტურა: სათაური, ფორმა, ღილაკები, ფილტრები, სია |
+| `style.css` | დიზაინი |
+| `script.js` | მთელი ლოგიკა |
 
-Open `index.html` in the browser.
+## რისი გაკეთება შეუძლია
+
+1. დავალების დამატება სახელით და პრიორიტეტით (Low / Medium / High)
+2. ფორმის ვალიდაცია: სახელი არ უნდა იყოს ცარიელი და მინიმუმ 3 სიმბოლო უნდა იყოს
+3. დავალების წაშლა და მთელი სიის გასუფთავება
+4. სტატუსის შეცვლა checkbox-ით (შესრულებული / აქტიური)
+5. ფილტრი: ყველა / აქტიური / შესრულებული
+6. დალაგება: ჯერ ახალი, ჯერ ძველი ან სახელით
+7. სტატისტიკა: სულ რამდენია, რამდენი შესრულდა და რამდენი დარჩა
+8. დავალებები ინახება `localStorage`-ში და გვერდის განახლების შემდეგაც რჩება
+9. საათი ზედა კუთხეში
+10. დავალებების ჩატვირთვა სერვერიდან (Fetch API)
+
+## როგორ მუშაობს კოდი (`script.js`)
+
+**მონაცემები.** ყველა დავალება ინახება `tasks` მასივში. თითოეული დავალება ასეთი ობიექტია:
+
+```js
+{
+  id: 1729331234567,          // Date.now(), რომ ყველას განსხვავებული id ჰქონდეს
+  title: 'Buy milk',
+  priority: 'high',
+  done: false,
+  date: '2026-10-19T10:00:00.000Z'
+}
+```
+
+**მთავარი ფუნქციები:**
+
+- `loadTasks()` - გვერდის გახსნისას კითხულობს შენახულ დავალებებს `localStorage`-დან. თუ იქ რამე დაზიანებულია, `try/catch` იჭერს შეცდომას და სია ცარიელიდან იწყება.
+- `saveTasks()` - ინახავს `tasks` მასივს `localStorage`-ში (`JSON.stringify`-ით).
+- `addTask()`, `deleteTask()`, `toggleTask()`, `clearAll()` - ცვლიან `tasks` მასივს, შემდეგ იძახებენ `saveTasks()` და `render()`.
+- `render()` - ასუფთავებს სიას და თავიდან ხატავს ეკრანზე. ასევე ანახლებს სტატისტიკას.
+- `getVisibleTasks()` - აბრუნებს იმ დავალებებს, რომლებიც უნდა გამოჩნდეს: ჯერ `filter()`-ით ფილტრავს, მერე `sort()`-ით ალაგებს.
+- `createTaskElement()` - ერთი დავალებისთვის ქმნის `<li>` ელემენტს `document.createElement`-ით. ტექსტი იწერება `textContent`-ით და არა `innerHTML`-ით, რომ თუ ვინმე სახელში HTML-ს ჩაწერს, ის არ შესრულდეს.
+- `showMessage()` - აჩვენებს შეტყობინებას (მაგ. "Task added") და `setTimeout`-ით 2 წამში მალავს.
+- `updateClock()` - `setInterval`-ით ყოველ წამში ანახლებს საათს `Date` ობიექტის დახმარებით.
+- `loadFromApi()` - `async/await`-ით აგზავნის GET მოთხოვნას:
+  `https://jsonplaceholder.typicode.com/todos?_limit=5`
+  თუ სერვერი შეცდომას დააბრუნებს ან ინტერნეტი არ არის, `catch` ბლოკი ეკრანზე შეცდომას აჩვენებს. ჩატვირთვის დროს ღილაკი გათიშულია და წერია "Loading...".
+
+**ივენთები.** ფაილის ბოლოში ყველა ღილაკს, ფორმას და select-ს `addEventListener`-ით ემატება ფუნქცია. ფორმის გაგზავნისას `event.preventDefault()` აჩერებს გვერდის გადატვირთვას.
+
+## რა გამოვიყენე
+
+- DOM: `getElementById`, `querySelectorAll`, `createElement`, `appendChild`, `classList`, `dataset`
+- მასივის მეთოდები: `filter`, `map`, `sort`, `forEach`, `concat`, `unshift`
+- `localStorage`, `JSON.parse`, `JSON.stringify`
+- `Date`, `setInterval`, `setTimeout`
+- `fetch`, `async/await`, `try/catch/finally`
+
+## როგორ შევამოწმო
+
+1. დააჭირე "Add" ცარიელ ველზე - უნდა გამოჩნდეს "Write the task name".
+2. ჩაწერე 2 ასო - უნდა გამოჩნდეს "Task name is too short".
+3. დაამატე რამდენიმე დავალება, მონიშნე ერთი და სცადე ფილტრები და დალაგება.
+4. განაახლე გვერდი (F5) - დავალებები უნდა დარჩეს.
+5. დააჭირე "Load from API" - სიაში 5 ახალი დავალება უნდა დაემატოს.
+6. გათიშე ინტერნეტი და ისევ დააჭირე "Load from API" - უნდა გამოჩნდეს წითელი შეცდომა.
