@@ -171,3 +171,9 @@ button:disabled {
   color: #888;
   padding: 15px;
 }
+
+/* hide empty messages */
+.error:empty,
+.message:empty {
+  display: none;
+}

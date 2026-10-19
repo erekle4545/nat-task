@@ -1,12 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task Manager</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Task Manager</h1>
+      <p class="clock" id="clock"></p>
+    </header>
+
+    <form class="form" id="taskForm">
+      <input type="text" id="taskInput" placeholder="New task">
+      <select id="prioritySelect">
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+      </select>
+      <button type="submit">Add</button>
+      <p class="error" id="formError"></p>
+    </form>
+
+    <p class="message" id="message"></p>
+    <p class="error" id="apiError"></p>
+
+    <div class="api-box">
+      <button id="loadBtn">Load from API</button>
+      <button class="clear" id="clearBtn">Clear all</button>
+    </div>
+
+    <div class="filters">
+      <div class="buttons">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="active">Active</button>
+        <button class="filter-btn" data-filter="done">Done</button>
+      </div>
+
+      <select id="sortSelect">
+        <option value="new">New first</option>
+        <option value="old">Old first</option>
+        <option value="title">By name</option>
+      </select>
+    </div>
+
+    <p class="stats" id="stats"></p>
+
+    <ul class="list" id="taskList"></ul>
+    <p class="empty" id="emptyText">There are no tasks yet</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>

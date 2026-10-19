@@ -1,6 +1,6 @@
 # Task Manager
 
-Task manager app built with React and Vite.
+Simple task manager made with HTML, CSS and JavaScript.
 
 ## Features
 
@@ -15,9 +15,12 @@ Task manager app built with React and Vite.
 9. Fetch API with async/await, GET https://jsonplaceholder.typicode.com/todos?_limit=5
 10. Error handling for the request
 
+## Files
+
+- `index.html` - page structure
+- `style.css` - styles
+- `script.js` - all the logic
+
 ## Run
 
-```
-npm install
-npm run dev
-```
+Open `index.html` in the browser.
