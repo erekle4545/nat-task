@@ -17,11 +17,23 @@ const taskList = document.getElementById('taskList')
 const emptyText = document.getElementById('emptyText')
 const clock = document.getElementById('clock')
 
-// read saved tasks from localStorage
-let tasks = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
+let tasks = loadTasks()
 let filter = 'all'
 let sort = 'new'
 let messageTimer = null
+
+// read saved tasks from localStorage
+function loadTasks() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY))
+    if (Array.isArray(saved)) {
+      return saved
+    }
+  } catch (err) {
+    console.log('Saved tasks are broken, starting with empty list')
+  }
+  return []
+}
 
 function saveTasks() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks))
